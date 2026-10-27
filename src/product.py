@@ -64,6 +64,6 @@ class Category:
         new_product_list = []
         for product in self.__products:
             new_product_list.append(
-                f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт."
+                f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
             )
-        return "\n".join(new_product_list)
+        return "".join(new_product_list)
