@@ -58,7 +58,7 @@ def test_init_category(classes: tuple[Product, Category]) -> None:
     product_iphone, category_phones = classes
     assert category_phones.name == "Смартфоны"
     assert category_phones.description == "Описание"
-    assert category_phones.products == "Iphone 15, 210000.0 руб. Остаток: 8 шт."
+    assert category_phones.products == "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
 
 
 def test_category_count() -> None:
