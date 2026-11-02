@@ -53,6 +53,38 @@ def test_price(classes: tuple[Product, Category]) -> None:
     assert product_iphone.price == 20000.0
 
 
+def test_str_product(classes: tuple[Product, Category]) -> None:
+    product_iphone, category_phones = classes
+
+    result = str(product_iphone)
+
+    assert result == "Iphone 15, 210000.0 руб. Остаток: 8 шт."
+
+
+def test_add_products() -> None:
+    product1 = Product(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
+    )
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+
+    result = product1 + product2
+
+    assert result == 2580000.0
+
+
+def test_add_products_with_zero_quantity() -> None:
+    product1 = Product("Samsung", "Описание", 1000.0, 0)
+    product2 = Product("Iphone", "Описание", 2000.0, 2)
+
+    assert product1 + product2 == 4000.0
+
+
+def test_add_products_with_invalid_type() -> None:
+    product = Product("Samsung", "Описание", 1000.0, 2)
+
+    assert product.__add__(5) is NotImplemented
+
+
 def test_init_category(classes: tuple[Product, Category]) -> None:
     """Тестирует корректность инициализации объекта Category"""
     product_iphone, category_phones = classes
@@ -93,3 +125,24 @@ def test_add_product(classes: tuple[Product, Category]) -> None:
     assert category_phones.products != initial_products
     assert product_samsung.name in category_phones.products
     assert Category.product_count == initial_count + 1
+
+
+def test_str_category() -> None:
+    product1 = Product(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
+    )
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+
+    category1 = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        [product1, product2],
+    )
+
+    assert str(category1) == "Смартфоны, количество продуктов: 13 шт."
+
+
+def test_str_empty_category() -> None:
+    category = Category("Пустая категория", "Описание", [])
+
+    assert str(category) == "Пустая категория, количество продуктов: 0 шт."
