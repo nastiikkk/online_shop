@@ -40,6 +40,14 @@ class Product:
             else:
                 self.__price = price
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other: Product) -> float:
+        if isinstance(other, Product):
+            return self.__price * self.quantity + other.__price * other.quantity
+        return NotImplemented
+
 
 class Category:
     name: str
@@ -63,7 +71,9 @@ class Category:
     def products(self) -> str:
         new_product_list = []
         for product in self.__products:
-            new_product_list.append(
-                f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
-            )
+            new_product_list.append(str(product) + "\n")
         return "".join(new_product_list)
+
+    def __str__(self):
+        amount = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {amount} шт."
