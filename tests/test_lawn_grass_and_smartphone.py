@@ -1,7 +1,8 @@
 import pytest
+
+from src.category import Category
 from src.lawn_grass import LawnGrass
 from src.smartphone import Smartphone
-from src.category import Category
 
 
 @pytest.fixture()
