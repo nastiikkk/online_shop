@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import pytest
 
-from src.product import Category, Product, LawnGrass, Smartphone
+from src.product import Category, LawnGrass, Product, Smartphone
 
 
 @pytest.fixture()
@@ -15,15 +15,8 @@ def product_and_category() -> tuple[Product, Category]:
 @pytest.fixture()
 def smartphone_and_grass() -> tuple[Smartphone, LawnGrass]:
     smartphone = Smartphone(
-        "Iphone 15",
-        "512GB, Gray space",
-        210000.0,
-        8,
-        98.2,
-        "15",
-        512,
-        "Gray space"
-        )
+        "Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space"
+    )
 
     grass = LawnGrass(
         "Газонная трава",
@@ -32,10 +25,11 @@ def smartphone_and_grass() -> tuple[Smartphone, LawnGrass]:
         20,
         "Россия",
         "7 дней",
-        "Зеленый"
-        )
+        "Зеленый",
+    )
 
     return smartphone, grass
+
 
 def test_init_product(product_and_category) -> None:
     """Тестирует корректность инициализации объекта Product"""
@@ -114,7 +108,7 @@ def test_add_products_with_invalid_type() -> None:
 
 def test_smartphone_init(smartphone_and_grass) -> None:
     """Тестирует корректность инициализации Smartphone"""
-    
+
     smartphone, grass = smartphone_and_grass
     assert smartphone.name == "Iphone 15"
     assert smartphone.description == "512GB, Gray space"
@@ -128,7 +122,7 @@ def test_smartphone_init(smartphone_and_grass) -> None:
 
 def test_lawn_grass_init(smartphone_and_grass) -> None:
     """Тестирует корректность инициализации LawnGrass"""
-    
+
     smartphone, grass = smartphone_and_grass
     assert grass.name == "Газонная трава"
     assert grass.description == "Элитная трава для газона"
@@ -191,7 +185,7 @@ def test_add_smartphone_to_category(smartphone_and_grass) -> None:
 
     category.add_product(smartphone)
 
-    assert category.products == 'Iphone 15, 210000.0 руб. Остаток: 8 шт.\n'
+    assert category.products == "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
 
 
 def test_add_lawn_grass_to_category(smartphone_and_grass) -> None:
@@ -202,7 +196,7 @@ def test_add_lawn_grass_to_category(smartphone_and_grass) -> None:
 
     category.add_product(grass)
 
-    assert category.products == 'Газонная трава, 500.0 руб. Остаток: 20 шт.\n'
+    assert category.products == "Газонная трава, 500.0 руб. Остаток: 20 шт.\n"
 
 
 def test_add_not_product_to_category() -> None:
