@@ -3,7 +3,7 @@ from unittest.mock import patch
 import pytest
 
 from src.category import Category
-from src.product import Product
+from src.product import BaseProduct, Product
 
 
 @pytest.fixture()
@@ -86,3 +86,8 @@ def test_add_products_with_invalid_type() -> None:
 
     with pytest.raises(TypeError):
         product.__add__(5)
+
+
+def test_base_product_is_abstract():
+    with pytest.raises(TypeError):
+        BaseProduct()
