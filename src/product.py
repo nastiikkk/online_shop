@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from src.print_mixin import PrintMixin
+
 
 class BaseProduct(ABC):
 
@@ -8,7 +10,7 @@ class BaseProduct(ABC):
         pass
 
 
-class Product(BaseProduct):
+class Product(PrintMixin, BaseProduct):
     name: str
     description: str
     __price: float
