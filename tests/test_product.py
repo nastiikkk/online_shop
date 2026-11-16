@@ -23,6 +23,12 @@ def test_init_product(product_and_category) -> None:
     assert product_iphone.quantity == 8
 
 
+def test_zero_quanity_product() -> None:
+
+    with pytest.raises(ValueError):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+
+
 def test_new_product() -> None:
     result = Product.new_product(
         {"name": "Samsung", "description": "Описание", "price": 180000.0, "quantity": 5}
@@ -72,13 +78,6 @@ def test_add_products() -> None:
     result = product1 + product2
 
     assert result == 2580000.0
-
-
-def test_add_products_with_zero_quantity() -> None:
-    product1 = Product("Samsung", "Описание", 1000.0, 0)
-    product2 = Product("Iphone", "Описание", 2000.0, 2)
-
-    assert product1 + product2 == 4000.0
 
 
 def test_add_products_with_invalid_type() -> None:
