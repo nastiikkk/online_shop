@@ -83,3 +83,24 @@ def test_str_empty_category() -> None:
     category = Category("Пустая категория", "Описание", [])
 
     assert str(category) == "Пустая категория, количество продуктов: 0 шт."
+
+
+def test_middle_price() -> None:
+    product1 = Product(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
+    )
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+
+    category1 = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        [product1, product2],
+    )
+
+    assert category1.middle_price() == 195000.0
+
+
+def test_empty_middle_price() -> None:
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+
+    assert category_empty.middle_price() == 0
